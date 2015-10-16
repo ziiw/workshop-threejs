@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Equalizer - Adrien Lavisiera</title>
+  <style>
+
+    @font-face {
+      font-family: 'ITCAvantGardeStd-Bk';
+      src:  url('build/fonts/ITCAvantGardeStd-Bk.eot') format('embedded-opentype'), url('build/fonts/ITCAvantGardeStd-Bk.otf')  format('opentype'), url('build/fonts/ITCAvantGardeStd-Bk.woff') format('woff'), url('build/fonts/ITCAvantGardeStd-Bk.ttf')  format('truetype'), url('build/fonts/ITCAvantGardeStd-Bk.svg#ITCAvantGardeStd-Bk') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'ITCAvantGardeStd-Demi';
+      src: url('build/fonts/ITCAvantGardeStd-Demi.eot?#iefix') format('embedded-opentype'),  url('build/fonts/ITCAvantGardeStd-Demi.otf')  format('opentype'),
+           url('build/fonts/ITCAvantGardeStd-Demi.woff') format('woff'), url('build/fonts/ITCAvantGardeStd-Demi.ttf')  format('truetype'), url('build/fonts/ITCAvantGardeStd-Demi.svg#ITCAvantGardeStd-Demi') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'ITCAvantGardeStd-XLt';
+      src: url('build/fonts/ITCAvantGardeStd-XLt.eot?#iefix') format('embedded-opentype'),  url('build/fonts/ITCAvantGardeStd-XLt.otf')  format('opentype'),
+           url('build/fonts/ITCAvantGardeStd-XLt.woff') format('woff'), url('build/fonts/ITCAvantGardeStd-XLt.ttf')  format('truetype'), url('build/fonts/ITCAvantGardeStd-XLt.svg#ITCAvantGardeStd-XLt') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    canvas{
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 100;
+    }
+
+    .title {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      z-index: 2000;
+    }
+
+    .text {
+      position: relative;
+      top: 40%;
+      transform: translate(0%, -50%);
+      vertical-align: center;
+    }
+
+    h1 {
+      position: relative;
+      left: -7px;
+      margin: 0px;
+      font-family: "ITCAvantGardeStd-Demi";
+      letter-spacing: 4px;
+      font-size: 66px;
+    }
+
+    h1 span{
+      margin-right: -10px;
+      display: inline-block;
+      height: 0px;
+      overflow: hidden;
+    }
+
+    h2{
+      position: relative;
+      top: -22px;
+      font-family: "ITCAvantGardeStd-XLt";
+      font-size: 26px;
+      letter-spacing: 4px;
+    }
+
+    .button{
+      position: relative;
+      top: 40%;
+      margin: auto;
+      width: 310px;
+      height: 65px;
+      margin-top: 50px;
+      background-image: url("build/assets/btn-bgc.png");
+      background-repeat: no-repeat;
+      background-position: 0px 0px;
+      border: 1px solid #000;
+      line-height: 65px;
+      color: white;
+      font-family: "ITCAvantGardeStd-Bk";
+      letter-spacing: 4px;
+      font-size: 20px;
+      z-index: 20;
+
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s;
+    }
+
+    .button:hover{
+      cursor: pointer;
+      background-position: -330px 0px;
+      color: black;
+    }
+
+    .options{
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%);
+      opacity: 0;
+      text-align: center;
+      font-family: "ITCAvantGardeStd-XLt";
+      font-size: 26px;
+      letter-spacing: 4px;
+      z-index: 1000;
+    }
+
+    .options img {
+      width: 200px;
+    }
+
+    .pause{
+      position: absolute;
+      opacity: 0; 
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      letter-spacing: 4px;
+      z-index: 1000;
+    }
+
+    .track, .dev{
+      font-family: "ITCAvantGardeStd-Demi";
+      font-size: 20px;
+    }
+
+    .trackName, .devName{
+      font-family: "ITCAvantGardeStd-XLt";
+      font-size: 40px;
+      position: relative;
+      top: -25px;
+    }
+
+    .restart {
+      margin-top: 25px;
+      font-family: "ITCAvantGardeStd-Bk";
+      font-size: 12px;
+    }
+
+    .restart span:hover{
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div class="title" id="intro">
+    <div class="text" id="text">
+      <h1>
+        <span class="e1">E</span>
+        <span class="q">Q</span>
+        <span class="u">U</span>
+        <span class="a">A</span>
+        <span class="l">L</span>
+        <span class="i">I</span>
+        <span class="z">Z</span>
+        <span class="e2">E</span>
+        <span class="r">R</span>
+      </h1>
+      <h2>Three.js workshop at Gobelins</h2>
+    </div>
+
+    <div class="options" id="options">
+      <img src="build/assets/anim_space.gif" alt=""><br>
+      Press SPACE to pause the experiment
+    </div>
+
+    <div class="button" id="start">LET'S PLAY</div>
+  </div>
+
+  <div class="pause" id="pause">
+    <div class="music">
+      <p class="track">TRACK</p>
+      <p class="trackName">Point Point - Morning BJ</p>
+    </div>
+    <div class="maker">
+      <p class="dev">EXPERIMENT MAKER</p>
+      <p class="devName">Adrien Lavisiera</p>
+    </div>
+    <img src="build/assets/logo_gobelins.png" alt="" class="school">
+
+    <!-- <div class="restart">
+      <p><span id="replay">REPLAY</span> ‹› <span id="menu">MENU</span></p>
+    </div> -->
+  </div>
+
+  <script src="./build/main.js"></script>
+  <script src="./build/vendors/wagner/Wagner.js"></script>
+  <script src="./build/vendors/wagner/Wagner.base.js"></script>
+  <script>
+    // configure Wagner
+    WAGNER.vertexShadersPath = './build/vendors/wagner/vertex-shaders/';
+    WAGNER.fragmentShadersPath = './build/vendors/wagner/fragment-shaders/';
+  </script>
+</body>
+</html>
