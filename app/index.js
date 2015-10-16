@@ -81,7 +81,7 @@ function handleClick(e) {
 
   // Load sound
   setTimeout(function(){
-    Sound.load( "./../build/mp3/music7.mp3" ); // music 7
+    Sound.load( "./../build/mp3/music6.mp3" ); // music 7
     Sound.on( "start", () => {
       
       audio  = document.getElementById("audioSource");
