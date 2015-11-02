@@ -16,7 +16,7 @@ import Tween from 'gsap';
 // Constant
 
 const _cubeSize  = 200;
-const _totalRows = 50;
+const _totalRows = 20;
 
 export default class Webgl {
 
@@ -24,7 +24,7 @@ export default class Webgl {
 
     // Scene
     this.scene      = new THREE.Scene();
-    this.scene.fog  = new THREE.FogExp2( 0xffffff, 0.00025) // 0.0003
+    this.scene.fog  = new THREE.FogExp2( 0xffffff, 0.00023) // 0.0003
 
     // Camera
     this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 100000);
@@ -149,7 +149,7 @@ export default class Webgl {
         pairsCube.sky               = new Cube(size, type)
         pairsCube.sky.castShadow    = true;
         pairsCube.sky.receiveShadow = true;
-        pairsCube.sky.position.set(((i+1) * (window.innerWidth/5) - window.innerWidth), j*(size.y + 400), 1000)
+        pairsCube.sky.position.set(((i+1) * (window.innerWidth/5) - window.innerWidth), j*(size.y +400), 1000)
         this.scene.add(pairsCube.sky)
 
 
@@ -324,7 +324,7 @@ export default class Webgl {
       this.intro = false;
     }
 
-    this.camera.position.y += 25 * this.deltaCam;
+    this.camera.position.y += 15 * this.deltaCam;
     this.directionalLightClone.position.set(0, this.camera.position.y, 400 );
     this.infiniteGround(this.camera.position.y);
 
